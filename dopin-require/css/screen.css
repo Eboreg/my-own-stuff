@@ -1,0 +1,101 @@
+* {
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+}
+
+html, body, #app, #main-wrapper, #cafe-element, #map-element {
+	height: 100%;
+}
+body {
+	font-family: "Helvetica", "Arial", "Verdana", sans-serif;
+	font-size: 81.25%;
+}
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+a {
+    text-decoration: none;
+}
+a:active {
+    position: relative;
+    top: 1px;
+}
+ul {
+    list-style-type: none;
+}
+
+#main-wrapper {
+	overflow: hidden;
+}
+#message-console {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+}
+#map-element img {
+	max-width: inherit;
+}
+#set-position-overlay {
+    position: absolute;
+    left: 80px;
+    top: 25px;
+    z-index: 3;
+    background-color: white;
+    padding: 10px;
+}
+#set-position-overlay span {
+    vertical-align: -3px;
+}
+
+.error-box,                                                                                                                                   
+.info-box {
+    display: none;
+    width: 100%;
+    color: white;
+    overflow: hidden;
+}
+.error-box p,                                                                                                                                 
+.info-box p {
+    padding: 10px;
+}
+.info-box {
+    background-color: blue;
+}
+.error-box {
+    background-color: red;
+}
+.info-window {
+	line-height: 1.35;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+/*                                                                                                                                            
+  KATEGORILISTA & CAFÉLISTA                                                                                                                   
+*/                                                                                                                                            
+.kat-list-sub {
+    display: none;
+}
+.kat-item,                                                                                                                                    
+.cafe-list-item {
+    cursor: pointer;
+}
+.kat-item-selected {
+    font-weight: bold;
+}
+#kat-list {
+    width: 200px;
+}
+#cafe-list {
+    width: 300px;
+}
+#kat-list,                                                                                                                                    
+#cafe-list {
+    height: 100%;
+    float: left;
+}
+.cafe-list-item .selected {
+    background-color: yellow;
+}

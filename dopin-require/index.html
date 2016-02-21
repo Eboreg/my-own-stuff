@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<base href="http://huseli.us/dopin-require/">
+		<meta charset="UTF-8">
+		<title>Dopin</title>
+		<link rel="stylesheet" href="css/screen.css">
+		<link rel="stylesheet" href="css/lib/jquery-ui.min.css">
+	</head>
+	<body>
+		<section id="app">
+			<ul id="kat-list"></ul>
+			<ul id="cafe-list"></ul>
+			<div id="main-wrapper">
+				<div id="map-element"></div>
+				<div id="cafe-element"></div>
+			</div>
+			<div id="message-console"></div>
+		</section>
+		
+		<script id="listItemTemplate" type="text/template">
+			<h3<% if (typeof highlight !== 'undefined' && highlight) print(' class="selected"'); %>>
+				<a href="cafe/<%= slug %>">
+					<%- namn %>: <%= katMatches %> träff, <% print(Math.round(distance)); %> m
+				</a> 
+			</h3>
+		</script>
+		<script id="userInfoWindowText" type="text/template">
+			<div id="user-info-window" class="info-window">
+				<p>
+					Är du inte här? Skriv in rätt adress:<br />
+					<input type="text" id="user-address-search-string" />
+				</p>
+			</div>
+		</script>
+		<script id="manualPositionOverlay" type="text/template">
+		     <img src="<%= markerImage %>" draggable="true" id="user-marker-image" />
+		     <span>Dra markören till din position eller skriv din adress: </span>
+		     <input type="text" id="user-address-search-string" />
+		</script>
+		<script id="cafeInfoWindowText" type="text/template">
+			<div class="info-window">
+				<p><strong><%- namn %></strong></p>
+				<p><%- displayadress %></p>
+				<% if (typeof bird !== 'undefined') { %>
+					<p>Fågelvägen: <%- bird %></p>
+				<% } if (typeof walking !== 'undefined') { %>
+				   <p>Gå: <%= walking.distance %>, <%= walking.duration %></p>
+				<% } if (typeof driving !== 'undefined') { %>
+				   <p>Bil: <%= driving.distance %>, <%= driving.duration %></p>
+				<% } if (typeof bicycling !== 'undefined') { %>
+				   <p>Cykel: <%= bicycling.distance %>, <%= bicycling.duration %></p>
+				<% } %>
+				<p>
+					Öppettider idag:
+					<% if ('false' === openToday) { %>
+						<em>Stängt</em>
+					<% } else if ('unknown' === openToday) { %>
+						<em>Okänt</em>
+					<% } else { %>
+						<%= openToday %>
+					<% } %>
+				</p>
+				<p><a href="cafe/<%= slug %>">Mer info</a></p>
+			</div>
+		</script>
+		<script id="cafeElement" type="text/template">
+			<h1><%- namn %></h1>
+			<% if(telnr) { %><p><%= telnr %></p><% } %>
+			<% if(www) { %><p><a target="_blank" href="<%= www %>">Hemsida</a></p><% } %>
+			<h3>Beskrivning</h3>
+			<p><%- beskrivning %></p>
+			<% if(specialitet) { %>
+				<h3>Specialitet</h3>
+				<p><%- specialitet %></p>
+			<% } %>
+			<h3>Adress</h3>
+			<p><%- displayadress %></p>
+			<h3>Öppettider</h3>
+			<% if (oppettider.length > 0) {
+				_.each(oppettider[0].veckodagar, function(veckodag, idx) { %>
+					<p>
+						<%= veckodagar[idx] %>: 
+						<% if (veckodag.ospec > 0) { %>
+							<em>Okänt</em>
+						<% } else if (veckodag.starttid === '') { %>
+							<em>Stängt</em>
+						<% } else { %>
+							<%= veckodag.starttid %> - <%= veckodag.sluttid %>
+						<% } %>
+					</p>
+				<% }); %>
+			<% } %>
+			<p><a href=".">Till kartan</a></p>
+		</script>
+		
+		<script data-main="js/app" src="js/lib/require.js"></script>
+	</body>
+</html>
